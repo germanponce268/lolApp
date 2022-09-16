@@ -1,0 +1,13 @@
+<h1>lolApp</h1>
+<hr>
+<div class="row">
+  <div class="col">
+    <app-buscador
+      [busqueda]="busqueda"
+      (onSummonerSearch)="apiRequest($event)"
+    ></app-buscador>
+  </div>
+  <div class="col">
+    <app-resultados></app-resultados>
+  </div>
+</div>

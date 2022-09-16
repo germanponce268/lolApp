@@ -1,0 +1,12 @@
+<h2>Busca info de tus partidas <small>{{busqueda.summonerName}}</small></h2>
+<form (ngSubmit)="buscar()">
+  <input
+   type="text"
+   placeholder="nombre invocador..."
+   name="summonerName"
+   [(ngModel)]="busqueda.summonerName"
+   >
+   <button type="submit">
+      Buscar
+   </button>
+</form>
