@@ -10,7 +10,8 @@ export class Service{
          apiResultado = {
           assists:0,
           kills:0,
-          deaths:0
+          deaths:0,
+          champion: ''
          }
 
   constructor(private http: HttpClient){
@@ -37,7 +38,8 @@ export class Service{
       this.apiResultado = {
         kills: (data as any).kills,
         assists: (data as any).assists,
-        deaths: (data as any).deaths
+        deaths: (data as any).deaths,
+        champion:(data as any).championName
       }
     })
   }
