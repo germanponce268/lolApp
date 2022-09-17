@@ -4,6 +4,7 @@
   <div class="col">
     <app-buscador
       [busqueda]="busqueda"
+      [key]="key"
       (onSummonerSearch)="apiRequest($event)"
       (onInputKey)="sendKey($event)"
     ></app-buscador>

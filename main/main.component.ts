@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Busqueda } from '../interfaces/buscador.interface';
 import { Service } from '../service/service';
+import { Key } from '../interfaces/key.interface';
 
 @Component({
   selector: 'app-main',
@@ -17,13 +18,16 @@ export class MainComponent {
     busqueda: Busqueda={
     summonerName:'L4D3d10s'
   }
-
+    key: Key = {
+      keyValue: ''
+    }
 
   apiRequest(busqueda:Busqueda){
     this.service.summonerLastMatch(busqueda.summonerName);
   }
 
-  sendKey(busqueda:Busqueda){
-    this.service.sendkey(busqueda.summonerName);
+  sendKey(key:Key){
+    console.log('la key', key.keyValue);
+    this.service.sendKey(key.keyValue);
   }
 }
