@@ -9,4 +9,19 @@
    <button type="submit">
       Buscar
    </button>
+
+</form>
+<br>
+<h2>Envia la key</h2>
+<form (ngSubmit)="sendKey()">
+  <input
+   type="text"
+   placeholder="api-key"
+   name="summonerName"
+   [(ngModel)]="busqueda.summonerName"
+   >
+   <button type="submit">
+      Enviar
+   </button>
+
 </form>

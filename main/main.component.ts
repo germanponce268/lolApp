@@ -22,4 +22,8 @@ export class MainComponent {
   apiRequest(busqueda:Busqueda){
     this.service.summonerLastMatch(busqueda.summonerName);
   }
+
+  sendKey(busqueda:Busqueda){
+    this.service.sendkey(busqueda.summonerName);
+  }
 }

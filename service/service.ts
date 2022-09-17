@@ -43,4 +43,12 @@ export class Service{
       }
     })
   }
+
+  sendkey(summoner:string){
+    const url = 'http://localhost:8080/lol/apiKey/' + summoner;
+    const resultado = this.http.post(url,summoner)
+    resultado.subscribe(data=>{
+      console.log(data)
+    })
+  }
 }

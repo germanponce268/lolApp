@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Busqueda } from '../interfaces/buscador.interface';
+import { Service } from '../service/service';
 
 @Component({
   selector: 'app-buscador',
@@ -8,7 +9,12 @@ import { Busqueda } from '../interfaces/buscador.interface';
 })
 export class BuscadorComponent  {
 
+  constructor(private service:Service) {
+
+  }
+
   @Output() onSummonerSearch: EventEmitter<Busqueda> = new EventEmitter();
+   @Output() onInputKey:EventEmitter<Busqueda> = new EventEmitter();
 
   @Input() busqueda: Busqueda= {
     summonerName: ''
@@ -19,5 +25,7 @@ export class BuscadorComponent  {
       this.onSummonerSearch.emit(this.busqueda)
   }
 
-
+  sendKey(){
+      this.onInputKey.emit(this.busqueda)
+  }
 }
