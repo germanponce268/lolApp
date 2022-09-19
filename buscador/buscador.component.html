@@ -1,4 +1,4 @@
-<h2>BUSCA INFO DE TUS PARTIDAS <strong>{{busqueda.summonerName}}</strong></h2>
+<h2 >BUSCA INFO DE TUS PARTIDAS <strong>{{busqueda.summonerName}}</strong></h2>
 <form (ngSubmit)="buscar()">
   <input
    type="text"
@@ -6,7 +6,7 @@
    name="summonerName"
    [(ngModel)]="busqueda.summonerName"
    >
-   <button type="submit">
+   <button type="submit" class="btn btn-outline-warning">
       Buscar
    </button>
 
@@ -20,8 +20,6 @@
    name="keyValue"
     [(ngModel)]="key.keyValue"
    >
-   <button type="submit">
-      Enviar
-   </button>
+   <button type="submit" class="btn btn-outline-warning">Enviar</button>
 
 </form>

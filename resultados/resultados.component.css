@@ -4,6 +4,7 @@ td {
 }
 th{
   text-align: center;
+  color: rgb(245, 200, 0);
 }
 
 #champion{
@@ -17,4 +18,9 @@ strong{
 
 h2{
   color: white;
+  text-align: center;
+}
+
+table{
+  margin-left: 40%;
 }

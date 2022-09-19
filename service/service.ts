@@ -6,13 +6,15 @@ import { Busqueda } from '../interfaces/buscador.interface';
 @Injectable()
 export class Service{
 
+
   public resultado: any;
+
          apiResultado = {
           assists:0,
           kills:0,
           deaths:0,
           champion: '',
-          win: false
+          win: undefined
          }
 
   constructor(private http: HttpClient){
@@ -34,9 +36,9 @@ export class Service{
   get resultadoPartida():string{
     let resultado :string = '';
    if(this.apiResultado.win){
-    return resultado = '  VICTORIA'
+    return resultado = 'VICTORIA';
    }else {
-    return resultado = 'DERROTA'
+    return resultado = 'DERROTA';
    }
 
   }
@@ -66,10 +68,6 @@ export class Service{
     })
   }
 
-  hasValue(){
-    if(this.apiResultado){
-      return true;
-    }
-    return false;
-  }
+
+
 }
