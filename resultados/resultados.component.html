@@ -1,7 +1,8 @@
-<h2>Resultado</h2>
+<h2>Resultado <strong id="resultado-api" *ngIf="serviceInit.apiResultado.win else partida">{{serviceInit.resultadoPartida}}</strong></h2>
     <table>
       <tr>
-        <th>
+        <th></th>
+        <th id="champion">
           {{serviceInit.apiResultado.champion}}
         </th>
       </tr>
@@ -23,3 +24,6 @@
         </td>
       </tr>
     </table>
+
+    <ng-template #partida>Partida</ng-template>
+

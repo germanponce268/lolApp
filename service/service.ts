@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
-import { SummonerStats } from '../interfaces/summoner.interface';
+import { SummonerStats, Perks } from '../interfaces/summoner.interface';
 import { Busqueda } from '../interfaces/buscador.interface';
 
 @Injectable()
@@ -11,7 +11,8 @@ export class Service{
           assists:0,
           kills:0,
           deaths:0,
-          champion: ''
+          champion: '',
+          win: false
          }
 
   constructor(private http: HttpClient){
@@ -29,6 +30,17 @@ export class Service{
         this.resultado = response;
       })
   }
+
+  get resultadoPartida():string{
+    let resultado :string = '';
+   if(this.apiResultado.win){
+    return resultado = '  VICTORIA'
+   }else {
+    return resultado = 'DERROTA'
+   }
+
+  }
+
    summonerLastMatch(summoner:string){
 
     const url = 'http://localhost:8080/lol/getLastMatchSummonerInfo/' + summoner;
@@ -39,7 +51,8 @@ export class Service{
         kills: (data as any).kills,
         assists: (data as any).assists,
         deaths: (data as any).deaths,
-        champion:(data as any).championName
+        champion:(data as any).championName,
+        win: (data as any).win
       }
     })
   }
@@ -51,5 +64,12 @@ export class Service{
     resultado.subscribe(data=>{
       console.log(data);
     })
+  }
+
+  hasValue(){
+    if(this.apiResultado){
+      return true;
+    }
+    return false;
   }
 }

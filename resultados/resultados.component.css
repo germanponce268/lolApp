@@ -1,0 +1,20 @@
+td {
+  text-align: center;
+  color: white;
+}
+th{
+  text-align: center;
+}
+
+#champion{
+  font-size: 30px;
+  color: aliceblue;
+}
+
+strong{
+  color: green;
+}
+
+h2{
+  color: white;
+}

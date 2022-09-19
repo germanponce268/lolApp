@@ -16,7 +16,7 @@ export class MainComponent {
 
 
     busqueda: Busqueda={
-    summonerName:'L4D3d10s'
+    summonerName:'INVOCADOR'
   }
     key: Key = {
       keyValue: ''
