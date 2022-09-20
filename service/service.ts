@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
-import { Inject, Injectable } from "@angular/core";
-import { SummonerStats, Perks } from '../interfaces/summoner.interface';
+import { Injectable } from "@angular/core";
+import { SummonerStats } from '../interfaces/summoner.interface';
 
 
 @Injectable()
@@ -26,7 +26,8 @@ export class Service{
   }
 
   get summonerInfo(){
-    const url = 'http://lolapp-env-1.eba-3euaguyk.us-east-1.elasticbeanstalk.com/lol/summoner/' + this.busqueda.summonerName;
+    //const url = 'http://lolapp-env-1.eba-3euaguyk.us-east-1.elasticbeanstalk.com/lol/summoner/' + this.busqueda.summonerName;
+    const url = '' + this.busqueda.summonerName;
     return this.http.get<SummonerStats>(url)
       .subscribe(response => {
         this.resultado = response;
@@ -44,8 +45,9 @@ export class Service{
   }
 
    summonerLastMatch(summoner:string){
+  //  const url = 'http://lolapp-env-1.eba-3euaguyk.us-east-1.elasticbeanstalk.com/lol/getLastMatchSummonerInfo/' + summoner;
 
-    const url = 'http://lolapp-env-1.eba-3euaguyk.us-east-1.elasticbeanstalk.com/lol/getLastMatchSummonerInfo/' + summoner;
+    const url = '' + summoner;
 
     const resultado = this.http.get(url)
     resultado.subscribe(data => {
