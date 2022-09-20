@@ -26,8 +26,8 @@ export class MainComponent {
     this.service.summonerLastMatch(busqueda.summonerName);
   }
 
-  sendKey(key:Key){
+  /* sendKey(key:Key){
     console.log('la key', key.keyValue);
     this.service.sendKey(key.keyValue);
-  }
+  } */
 }

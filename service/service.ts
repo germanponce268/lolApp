@@ -26,7 +26,7 @@ export class Service{
   }
 
   get summonerInfo(){
-    const url = 'http://localhost:8080/lol/summoner/' + this.busqueda.summonerName;
+    const url = 'http://lolapp-env-1.eba-3euaguyk.us-east-1.elasticbeanstalk.com/lol/summoner/' + this.busqueda.summonerName;
     return this.http.get<SummonerStats>(url)
       .subscribe(response => {
         this.resultado = response;
@@ -45,7 +45,7 @@ export class Service{
 
    summonerLastMatch(summoner:string){
 
-    const url = 'http://localhost:8080/lol/getLastMatchSummonerInfo/' + summoner;
+    const url = 'http://lolapp-env-1.eba-3euaguyk.us-east-1.elasticbeanstalk.com/lol/getLastMatchSummonerInfo/' + summoner;
 
     const resultado = this.http.get(url)
     resultado.subscribe(data => {
@@ -59,7 +59,7 @@ export class Service{
     })
   }
 
-  sendKey(summoner:string){
+ /*  sendKey(summoner:string){
     const url = 'http://localhost:8080/lol/apiKey/' + summoner;
     console.log('la url',url);
     const resultado = this.http.post(url,summoner)
@@ -67,7 +67,7 @@ export class Service{
       console.log(data);
     })
   }
-
+ */
 
 
 }
