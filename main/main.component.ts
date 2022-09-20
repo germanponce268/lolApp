@@ -18,9 +18,6 @@ export class MainComponent {
     busqueda: Busqueda={
     summonerName:'INVOCADOR'
   }
-    key: Key = {
-      keyValue: ''
-    }
 
   apiRequest(busqueda:Busqueda){
     this.service.summonerLastMatch(busqueda.summonerName);

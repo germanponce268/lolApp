@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { SummonerStats, Perks } from '../interfaces/summoner.interface';
-import { Busqueda } from '../interfaces/buscador.interface';
+
 
 @Injectable()
 export class Service{

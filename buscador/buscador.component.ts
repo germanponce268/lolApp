@@ -15,22 +15,22 @@ export class BuscadorComponent  {
   }
 
   @Output() onSummonerSearch: EventEmitter<Busqueda> = new EventEmitter();
-   @Output() onInputKey:EventEmitter<Key> = new EventEmitter();
+   /* @Output() onInputKey:EventEmitter<Key> = new EventEmitter(); */
 
   @Input() busqueda: Busqueda= {
     summonerName: ''
   }
 
-   @Input()key : Key= {
+ /*   @Input()key : Key= {
       keyValue: ''
-  }
+  } */
 
 
   buscar(){
       this.onSummonerSearch.emit(this.busqueda)
   }
 
-  sendKey(){
+ /*  sendKey(){
       this.onInputKey.emit(this.key)
-  }
+  } */
 }
