@@ -20,7 +20,7 @@ export class MainComponent {
   }
 
   apiRequest(busqueda:Busqueda){
-    this.service.summonerLastMatch(busqueda.summonerName);
+    this.service.byNameResponse(busqueda.summonerName);
   }
 
   /* sendKey(key:Key){

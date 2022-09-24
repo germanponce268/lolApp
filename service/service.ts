@@ -1,11 +1,25 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { Injectable, ɵɵsetComponentScope } from "@angular/core";
 import { SummonerStats } from '../interfaces/summoner.interface';
+import { SummonerByNameResponse } from '../interfaces/byname';
+import { Match } from '../interfaces/match.interface';
+import { MatchInfo, Participant } from '../interfaces/match.info.interface';
 
 
 @Injectable()
 export class Service{
 
+
+  private apiKey:string = 'RGAPI-a5322d58-fde9-4f21-a7ff-5d0b182210d7';
+  private matches:string ='' ;
+  private puuid:string ='';
+  private participants:Participant[]=[];
+
+        endpoints = {
+          byName: 'https://la2.api.riotgames.com/lol/summoner/v4/summoners/by-name',
+          matches:'https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/',
+          lastMatch:'https://americas.api.riotgames.com/lol/match/v5/matches/'
+        }
 
   public resultado: any;
 
@@ -26,7 +40,7 @@ export class Service{
   }
 
   get summonerInfo(){
-    //const url = 'http://lolapp-env-1.eba-3euaguyk.us-east-1.elasticbeanstalk.com/lol/summoner/' + this.busqueda.summonerName;
+
     const url = 'http://lolapp-env-1.eba-3euaguyk.us-east-1.elasticbeanstalk.com/lol/summoner/' + this.busqueda.summonerName;
     return this.http.get<SummonerStats>(url)
       .subscribe(response => {
@@ -45,7 +59,7 @@ export class Service{
   }
 
    summonerLastMatch(summoner:string){
-  //  const url = 'http://lolapp-env-1.eba-3euaguyk.us-east-1.elasticbeanstalk.com/lol/getLastMatchSummonerInfo/' + summoner;
+
 
     const url = 'http://lolapp-env-1.eba-3euaguyk.us-east-1.elasticbeanstalk.com/lol/getLastMatchSummonerInfo/' + summoner;
 
@@ -61,15 +75,49 @@ export class Service{
     })
   }
 
- /*  sendKey(summoner:string){
-    const url = 'http://localhost:8080/lol/apiKey/' + summoner;
-    console.log('la url',url);
-    const resultado = this.http.post(url,summoner)
-    resultado.subscribe(data=>{
-      console.log(data);
-    })
+
+
+  byNameResponse(summoner:string){
+    let params = new HttpParams()
+      .set('api_key', this.apiKey);
+    console.log(params);
+    this.http.get<SummonerByNameResponse>(`${this.endpoints.byName}/${summoner}`,{params})
+      .subscribe(response =>{
+        this.puuid = response.puuid;
+        console.log(this.puuid);
+        this.matchesResponse(this.puuid,summoner);
+      })
+
   }
- */
+
+  matchesResponse(puuid:string, summoner:string){
+    let params = new HttpParams()
+      .set('limit', '10')
+      .set('api_key', this.apiKey)
+
+    this.http.get<string>(`${this.endpoints.matches}${puuid}/ids` ,{params})
+      .subscribe((response:string) =>{
+        this.matches = response;
+        const lastMatch = this.matches[0];
+        this.lastMatchInfoResponse(lastMatch,summoner);
+      })
+
+  }
+
+  lastMatchInfoResponse(lastMatch:string, summoner:string){
 
 
+
+    let params = new HttpParams()
+      .set('api_key', this.apiKey)
+
+    this.http.get<MatchInfo>(`${this.endpoints.lastMatch}${lastMatch}`,{params})
+      .subscribe(response =>{
+        console.log(response.info.participants);
+        this.participants = response.info.participants;
+        const respuesta = this.participants.filter(participant=>{
+
+      })
+      }
+    )}
 }
