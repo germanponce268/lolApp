@@ -11,7 +11,6 @@ import { Key } from '../interfaces/key.interface';
 export class MainComponent {
 
   constructor(private service : Service){
-    this.service.summonerInfo;
   }
 
 

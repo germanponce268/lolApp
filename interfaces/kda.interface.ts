@@ -3,4 +3,5 @@ export interface Kda {
   deaths:number;
   assists:number;
   championName:string;
+  win:boolean;
 }
