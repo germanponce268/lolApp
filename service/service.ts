@@ -5,22 +5,25 @@ import { SummonerByNameResponse } from '../interfaces/byname';
 import { Match } from '../interfaces/match.interface';
 import { MatchInfo, Participant } from '../interfaces/match.info.interface';
 import { LastMatchSummonerInfo } from '../interfaces/last.match.summoner.info.interface';
+import { Kda } from '../interfaces/kda.interface';
 
 
 @Injectable()
 export class Service{
 
 
-  private apiKey:string = 'RGAPI-a5322d58-fde9-4f21-a7ff-5d0b182210d7';
+  private apiKey:string = 'RGAPI-fd200537-73d1-4bc8-baec-9d62a6713a24';
   private matches:string ='' ;
   private puuid:string ='';
+  private lastMatchInfo: LastMatchSummonerInfo[]=[];
   private participants:Participant[]=[];
+  public kda : Kda = {kills:0,deaths:0,assists:0, championName:''};
 
         endpoints = {
           byName: 'https://la2.api.riotgames.com/lol/summoner/v4/summoners/by-name',
           matches:'https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/',
           lastMatch:'https://americas.api.riotgames.com/lol/match/v5/matches/'
-        }
+        };
 
   public resultado: any;
 
@@ -30,15 +33,15 @@ export class Service{
           deaths:0,
           champion: '',
           win: undefined
-         }
+         };
 
   constructor(private http: HttpClient){
-    console.log(this.resultado)
+    console.log(this.resultado);
   }
 
     busqueda = {
     summonerName: 'L4D3d10s'
-  }
+  };
 
   get summonerInfo(){
 
@@ -46,7 +49,7 @@ export class Service{
     return this.http.get<SummonerStats>(url)
       .subscribe(response => {
         this.resultado = response;
-      })
+      });
   }
 
   get resultadoPartida():string{
@@ -64,7 +67,7 @@ export class Service{
 
     const url = 'http://lolapp-env-1.eba-3euaguyk.us-east-1.elasticbeanstalk.com/lol/getLastMatchSummonerInfo/' + summoner;
 
-    const resultado = this.http.get(url)
+    const resultado = this.http.get(url);
     resultado.subscribe(data => {
       this.apiResultado = {
         kills: (data as any).kills,
@@ -72,8 +75,8 @@ export class Service{
         deaths: (data as any).deaths,
         champion:(data as any).championName,
         win: (data as any).win
-      }
-    })
+      };
+    });
   }
 
 
@@ -87,14 +90,14 @@ export class Service{
         this.puuid = response.puuid;
         console.log(this.puuid);
         this.matchesResponse(this.puuid,summoner);
-      })
+      });
 
   }
 
   matchesResponse(puuid:string, summoner:string){
     let params = new HttpParams()
       .set('limit', '10')
-      .set('api_key', this.apiKey)
+      .set('api_key', this.apiKey);
 
     this.http.get<string>(`${this.endpoints.matches}${puuid}/ids` ,{params})
       .subscribe((response:string) =>{
@@ -102,13 +105,13 @@ export class Service{
         const lastMatch = this.matches[0];
         console.log(lastMatch);
         this.lastMatchInfoResponse(lastMatch,summoner);
-      })
+      });
 
   }
 
   lastMatchInfoResponse(lastMatch:string, summoner:string){
     let params = new HttpParams()
-      .set('api_key', this.apiKey)
+      .set('api_key', this.apiKey);
 
     this.http.get<MatchInfo>(`${this.endpoints.lastMatch}${lastMatch}`,{params})
       .subscribe(response =>{
@@ -116,13 +119,23 @@ export class Service{
         this.participants = response.info.participants;
         let respuesta = this.participants.filter(participant=>{
          return participant.summonerName === summoner;
-      })
+      });
       console.log('lastmatchinfo',respuesta);
-      this.summonerLastMatchInfo(respuesta);
+      this.lastMatchInfo = respuesta;
+      const lastMatchObj = this.lastMatchInfo[0];
+      const {kills, deaths, assists, championName} = lastMatchObj;
+      this.kda.assists = assists;
+      this.kda.deaths = deaths;
+      this.kda.kills = kills;
+      this.kda.championName = championName;
+      console.log(this.kda);
+      //this.summonerLastMatchInfo(respuesta);
       }
-    )}
+    );}
 
-    summonerLastMatchInfo(summonerLastMatchInfo:LastMatchSummonerInfo[]){
+   /*  summonerLastMatchInfo(summonerLastMatchInfo:LastMatchSummonerInfo[]){
       console.log(summonerLastMatchInfo);
-    }
+      this.lastMatchInfo = summonerLastMatchInfo;
+      console.log(this.lastMatchInfo);
+    } */
 }
