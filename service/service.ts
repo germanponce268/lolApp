@@ -1,9 +1,10 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { Injectable, ɵɵsetComponentScope } from "@angular/core";
+import { ComponentFactoryResolver, Injectable, ɵɵsetComponentScope } from "@angular/core";
 import { SummonerStats } from '../interfaces/summoner.interface';
 import { SummonerByNameResponse } from '../interfaces/byname';
 import { Match } from '../interfaces/match.interface';
 import { MatchInfo, Participant } from '../interfaces/match.info.interface';
+import { LastMatchSummonerInfo } from '../interfaces/last.match.summoner.info.interface';
 
 
 @Injectable()
@@ -99,15 +100,13 @@ export class Service{
       .subscribe((response:string) =>{
         this.matches = response;
         const lastMatch = this.matches[0];
+        console.log(lastMatch);
         this.lastMatchInfoResponse(lastMatch,summoner);
       })
 
   }
 
   lastMatchInfoResponse(lastMatch:string, summoner:string){
-
-
-
     let params = new HttpParams()
       .set('api_key', this.apiKey)
 
@@ -115,9 +114,15 @@ export class Service{
       .subscribe(response =>{
         console.log(response.info.participants);
         this.participants = response.info.participants;
-        const respuesta = this.participants.filter(participant=>{
-
+        let respuesta = this.participants.filter(participant=>{
+         return participant.summonerName === summoner;
       })
+      console.log('lastmatchinfo',respuesta);
+      this.summonerLastMatchInfo(respuesta);
       }
     )}
+
+    summonerLastMatchInfo(summonerLastMatchInfo:LastMatchSummonerInfo[]){
+      console.log(summonerLastMatchInfo);
+    }
 }
