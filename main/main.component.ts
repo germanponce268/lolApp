@@ -21,9 +21,4 @@ export class MainComponent {
   apiRequest(busqueda:Busqueda){
     this.service.byNameResponse(busqueda.summonerName);
   }
-
-  /* sendKey(key:Key){
-    console.log('la key', key.keyValue);
-    this.service.sendKey(key.keyValue);
-  } */
 }
