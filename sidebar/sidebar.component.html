@@ -1,0 +1,16 @@
+<div id="sidebar">
+  <h3>
+    Historial
+  </h3>
+  <hr>
+  <div class="list-group list-reset">
+    <ul>
+      <li *ngFor="let item of historial"  >
+        <a href="#" class="list-group-item list-group-item-action"
+        (click)="buscarSummoner(item)">
+          {{item}}
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

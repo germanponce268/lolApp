@@ -9,13 +9,15 @@ import { ResultadosComponent } from './resultados/resultados.component';
 import { FormsModule } from '@angular/forms';
 import { Service } from './service/service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     BuscadorComponent,
-    ResultadosComponent
+    ResultadosComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,

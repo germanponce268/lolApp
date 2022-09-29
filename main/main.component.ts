@@ -19,6 +19,7 @@ export class MainComponent {
   }
 
   apiRequest(busqueda:Busqueda){
-    this.service.byNameResponse(busqueda.summonerName);
+    this.service.buscarSummoner(busqueda.summonerName);
+    //this.service.byNameResponse(busqueda.summonerName);
   }
 }
